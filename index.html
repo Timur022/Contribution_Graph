@@ -30,10 +30,11 @@
         console.log(myArr["2022-10-26"]);
         var now = new Date();
         var days = [];
-        var d = 0
-        for (let j = 0; j < 7; j++) {
-            for (let i = 356; i >= 0; i--) {
-                var date = new Date(parseInt(+now)-(86400000*i));
+        var d = 0;
+        for (let i = 356; i >= 0; i--) {
+            for (let j = 0; j < 7; j++) {
+                var date = new Date();
+                date.setDate(date.getDate()-i);
                 if (wd[j]==date.getDay()) {
                     var dict = {};
                     var month = (date.getMonth()+1);
@@ -53,7 +54,7 @@
         var colspannn = 0
         for (var i = 12; i > 0; i--) {
             let th = document.createElement('th');
-            date = new Date(parseInt(+now)-(2592000000*(i-1)))
+            var date = new Date(parseInt(+now)-(2592000000*(i-1)));
             th.innerHTML = month_all[date.getMonth()];
             if (colspannn == 1) {
                 th.setAttribute('colspan', "5");
@@ -71,37 +72,44 @@
             let td = document.createElement('td');
             td.innerHTML = week_day[j];
             tr.appendChild(td);
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 357; i+=7) {
                 // const att = document.createAttribute("name");
                 // att.value = "-"++"-";
                 let td = document.createElement('td');
-                td.setAttribute('name', days[(i+1)*(j+1)].Date);
+
+                td.setAttribute('name', days[j+i].Date);
                 var color_t = "a"
                 var data_tooltip = "No contributions"
-                if (days[(i+1)*(j+1)].Contributions >= 1 && days[(i+1)*(j+1)].Contributions <= 9){
+                if (days[j+i].Contributions >= 1 && days[j+i].Contributions <= 9){
                     color_t = "b";
-                    data_tooltip = days[(i+1)*(j+1)].Contributions+" contributions";
+                    data_tooltip = days[j+i].Contributions+" contributions";
                 }
-                else if (days[(i+1)*(j+1)].Contributions >= 10 && days[(i+1)*(j+1)].Contributions <= 19){
+                else if (days[j+i].Contributions >= 10 && days[j+i].Contributions <= 19){
                     color_t = "c";
-                    data_tooltip = days[(i+1)*(j+1)].Contributions+" contributions";
+                    data_tooltip = days[j+i].Contributions+" contributions";
                 }
-                else if (days[(i+1)*(j+1)].Contributions >= 20 && days[(i+1)*(j+1)].Contributions <= 29){
+                else if (days[j+i].Contributions >= 20 && days[j+i].Contributions <= 29){
                     color_t = "d";
-                    data_tooltip = days[(i+1)*(j+1)].Contributions+" contributions";
+                    data_tooltip = days[j+i].Contributions+" contributions";
                 }
-                else if (days[(i+1)*(j+1)].Contributions >= 30){
+                else if (days[j+i].Contributions >= 30){
                     color_t = "e";
-                    data_tooltip = days[(i+1)*(j+1)].Contributions+" contributions";
+                    data_tooltip = days[j+i].Contributions+" contributions";
                 }
 
                 td.setAttribute('class', "td "+color_t);
-                td.setAttribute('data-tooltip', data_tooltip + " " + new Date(days[(i+1)*(j+1)].Date))
+                td.setAttribute('data-tooltip', data_tooltip + " " + new Date(days[j+i].Date))
                 tr.appendChild(td);
                 // d--;
             }
             table.appendChild(tr);
         }
+        // var tch = document.querySelectorAll("#contr tr");
+        // tch.forEach(function(tr) {
+        //     tr.querySelectorAll('td').forEach(function(td) {
+        //         alert(td.textContent)
+        //     });
+        // });
     </script>
 </body>
 </html>
