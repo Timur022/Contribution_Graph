@@ -8,9 +8,14 @@
     <script src="js/script.js"></script>
 </head>
 <body>
-    <table id="contr">
-        <tr id="head"></tr>
-    </table>
+    <div class="main">
+        <table id="contr">
+            <tr id="head"></tr>
+        </table>
+    </div>
+    <div>
+        
+    </div>
     <script type='text/javascript'>
         function httpGet(theUrl)
         {
@@ -34,7 +39,7 @@
                         month = "0"+month;
                     }
                     dict['Date'] = date.getFullYear()+"-"+month+"-"+date.getDate();
-                    dict['Contact'] = myArr[date.getFullYear()+"-"+month+"-"+date.getDate()];
+                    dict['Contributions'] = myArr[date.getFullYear()+"-"+month+"-"+date.getDate()];
                     days[d] = dict;
                     d++;
                 }
@@ -66,7 +71,21 @@
                 // att.value = "-"++"-";
                 let td = document.createElement('td');
                 td.setAttribute('name', days[(i+1)*(j+1)].Date);
-                td.style.backgroundColor = "#DEDEDE";
+                td.setAttribute('class', "td");
+                var color = "#DEDEDE"
+                if (days[(i+1)*(j+1)].Contributions >= 1 && days[(i+1)*(j+1)].Contributions <= 9){
+                    color = "#C5E3E6"
+                }
+                else if (days[(i+1)*(j+1)].Contributions >= 10 && days[(i+1)*(j+1)].Contributions <= 19){
+                    color = "#87B4EC"
+                }
+                else if (days[(i+1)*(j+1)].Contributions >= 20 && days[(i+1)*(j+1)].Contributions <= 29){
+                    color = "#536CBE"
+                }
+                else if (days[(i+1)*(j+1)].Contributions >= 30){
+                    color = "#344DA9"
+                }
+                td.style.backgroundColor = color;
                 tr.appendChild(td);
                 // d--;
             }
