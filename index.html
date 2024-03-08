@@ -9,20 +9,7 @@
 </head>
 <body>
     <table id="contr">
-        <tr>
-            <th colspan="4">Январь</th>
-            <th colspan="4">Февраль</th>
-            <th colspan="4">Март</th>
-            <th colspan="4">Апрель</th>
-            <th colspan="4">Май</th>
-            <th colspan="4">Июнь</th>
-            <th colspan="4">Июль</th>
-            <th colspan="4">Август</th>
-            <th colspan="4">Сентябрь</th>
-            <th colspan="4">Октябрь</th>
-            <th colspan="4">Ноябрь</th>
-            <th colspan="4">Декабрь</th>
-        </tr>
+        <tr id="head"></tr>
     </table>
     <script type='text/javascript'>
         function httpGet(theUrl)
@@ -35,25 +22,53 @@
         var myArr = JSON.parse(httpGet("https://dpg.gg/test/calendar.json"));
         console.log(myArr["2022-10-26"]);
         var now = new Date();
-        var date = new Date("2022-10-26");
-        var date2 = new Date(parseInt(+date)-(86400000*51));
-        var days = []
-        for (i = 0; i < 357; i++) {
-            var dict = {}
-            dict['Date'] = +"-"
-            dict['Contact'] = clients[i].contact
-            days[i] = dict
+        var days = [];
+        var d = 0
+        for (let j = 0; j < 7; j++) {
+            for (let i = 356; i >= 0; i--) {
+                var date = new Date(parseInt(+now)-(86400000*i));
+                if (wd[j]==date.getDay()) {
+                    var dict = {};
+                    var month = (date.getMonth()+1);
+                    if (parseInt(month) < 10){
+                        month = "0"+month;
+                    }
+                    dict['Date'] = date.getFullYear()+"-"+month+"-"+date.getDate();
+                    dict['Contact'] = myArr[date.getFullYear()+"-"+month+"-"+date.getDate()];
+                    days[d] = dict;
+                    d++;
+                }
+            }
         }
+        console.log(days);
         // parseInt(+date/1000)
+        let head = document.getElementById("head");
+        var colspannn = 0
+        for (var i = 12; i > 0; i--) {
+            let th = document.createElement('th');
+            date = new Date(parseInt(+now)-(2592000000*(i-1)))
+            th.innerHTML = month_all[date.getMonth()];
+            if (colspannn == 1) {
+                th.setAttribute('colspan', "5");
+                colspannn = 0
+            }
+            else {
+                th.setAttribute('colspan', "4");
+                colspannn = colspannn + 0.25
+            }
+            head.appendChild(th);
+        }
         let table = document.querySelector('#contr');
-        for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < 7; j++) {
             let tr = document.createElement('tr');
             for (let i = 0; i < 50; i++) {
                 // const att = document.createAttribute("name");
                 // att.value = "-"++"-";
                 let td = document.createElement('td');
-                // td.setAttributeNode(att);
+                td.setAttribute('name', days[(i+1)*(j+1)].Date);
+                td.style.backgroundColor = "#DEDEDE";
                 tr.appendChild(td);
+                // d--;
             }
             table.appendChild(tr);
         }
