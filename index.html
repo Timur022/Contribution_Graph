@@ -70,11 +70,9 @@
         for (let j = 0; j < 7; j++) {
             let tr = document.createElement('tr');
             let td = document.createElement('td');
-            td.innerHTML = week_day[j];
+            td.innerHTML = week_day[new Date(days[j+new Date().getDay()+1].Date).getDay()];
             tr.appendChild(td);
             for (let i = 0; i < 357; i+=7) {
-                // const att = document.createAttribute("name");
-                // att.value = "-"++"-";
                 let td = document.createElement('td');
 
                 td.setAttribute('name', days[j+i].Date);
