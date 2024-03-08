@@ -14,7 +14,9 @@
         </table>
     </div>
     <div>
-        
+        <table>
+            <tr><td>Меньше</td><td class="td a"></td><td class="td b"></td><td class="td c"></td><td class="td d"></td><td class="td e"></td><td>Больше</td></tr>
+        </table>
     </div>
     <script type='text/javascript'>
         function httpGet(theUrl)
@@ -66,26 +68,30 @@
         let table = document.querySelector('#contr');
         for (let j = 0; j < 7; j++) {
             let tr = document.createElement('tr');
+            let td = document.createElement('td');
+            td.innerHTML = week_day[j];
+            tr.appendChild(td);
             for (let i = 0; i < 50; i++) {
                 // const att = document.createAttribute("name");
                 // att.value = "-"++"-";
                 let td = document.createElement('td');
                 td.setAttribute('name', days[(i+1)*(j+1)].Date);
-                td.setAttribute('class', "td");
-                var color = "#DEDEDE"
+                var color_t = "a"
                 if (days[(i+1)*(j+1)].Contributions >= 1 && days[(i+1)*(j+1)].Contributions <= 9){
-                    color = "#C5E3E6"
+                    color_t = "b"
                 }
                 else if (days[(i+1)*(j+1)].Contributions >= 10 && days[(i+1)*(j+1)].Contributions <= 19){
-                    color = "#87B4EC"
+                    color_t = "c"
                 }
                 else if (days[(i+1)*(j+1)].Contributions >= 20 && days[(i+1)*(j+1)].Contributions <= 29){
-                    color = "#536CBE"
+                    color_t = "d"
                 }
                 else if (days[(i+1)*(j+1)].Contributions >= 30){
-                    color = "#344DA9"
+                    color_t = "e"
                 }
-                td.style.backgroundColor = color;
+
+                td.setAttribute('class', "td "+color_t);
+                td.setAttribute('data-tooltip', "test");
                 tr.appendChild(td);
                 // d--;
             }

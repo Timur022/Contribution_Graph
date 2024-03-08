@@ -1,5 +1,50 @@
 
+div {
+	margin-bottom: 1em;
+}
+
 .td {
 	width: 20px;
 	height: 20px;
 }
+
+.a {
+	background-color: #DEDEDE;
+}
+
+.b {
+	background-color: #C5E3E6;
+}
+
+.c {
+	background-color: #87B4EC;
+}
+
+.d {
+	background-color: #536CBE;
+}
+
+.e {
+	background-color: #344DA9;
+}
+
+[data-tooltip] {
+    position: relative;
+   }
+   [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    width: 100px;
+    left: 0; top: 0;
+    background: #0E0E0E;
+    color: #EBEBEB;
+    padding: 0.5em;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    opacity: 0;
+    transition: 1s;
+   } 
+   [data-tooltip]:hover::after {
+    opacity: 1;
+    top: 2em;
+   }
