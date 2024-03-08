@@ -1,11 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contribution Graph</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
 </head>
 <body>
-
+    <table id="contr">
+        <tr>
+            <th>Январь</th>
+            <th>Февраль</th>
+            <th>Март</th>
+            <th>Апрель</th>
+            <th>Май</th>
+            <th>Июнь</th>
+            <th>Июль</th>
+            <th>Август</th>
+            <th>Сентябрь</th>
+            <th>Октябрь</th>
+            <th>Ноябрь</th>
+            <th>Декабрь</th>
+        </tr>
+    </table>
+    <script type='text/javascript'>
+        function httpGet(theUrl)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", theUrl, false );
+            xmlHttp.send( null );
+            return xmlHttp.responseText;
+        }
+        console.log(httpGet("https://dpg.gg/test/calendar.json"))
+        var now = new Date();
+        var date = new Date("2022-10-26");
+        console.log(week_day[date.getDay()]);
+        let table = document.querySelector('#contr');
+        for (let i = 0; i < 7; i++) {
+            let tr = document.createElement('tr');
+            
+            for (let i = 0; i < 50; i++) {
+                let td = document.createElement('td');
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+    </script>
 </body>
 </html>
