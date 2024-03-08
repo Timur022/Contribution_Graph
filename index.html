@@ -15,7 +15,7 @@
     </div>
     <div>
         <table>
-            <tr><td>Меньше</td><td class="td a"></td><td class="td b"></td><td class="td c"></td><td class="td d"></td><td class="td e"></td><td>Больше</td></tr>
+            <tr><td>Меньше</td><td class="td a" data-tooltip="No contributions"></td><td class="td b" data-tooltip="1-9 contributions"></td><td class="td c" data-tooltip="10-19 contributions"></td><td class="td d" data-tooltip="20-29 contributions"></td><td class="td e" data-tooltip="30+ contributions"></td><td>Больше</td></tr>
         </table>
     </div>
     <script type='text/javascript'>
@@ -77,21 +77,26 @@
                 let td = document.createElement('td');
                 td.setAttribute('name', days[(i+1)*(j+1)].Date);
                 var color_t = "a"
+                var data_tooltip = "No contributions"
                 if (days[(i+1)*(j+1)].Contributions >= 1 && days[(i+1)*(j+1)].Contributions <= 9){
-                    color_t = "b"
+                    color_t = "b";
+                    data_tooltip = days[(i+1)*(j+1)].Contributions+" contributions";
                 }
                 else if (days[(i+1)*(j+1)].Contributions >= 10 && days[(i+1)*(j+1)].Contributions <= 19){
-                    color_t = "c"
+                    color_t = "c";
+                    data_tooltip = days[(i+1)*(j+1)].Contributions+" contributions";
                 }
                 else if (days[(i+1)*(j+1)].Contributions >= 20 && days[(i+1)*(j+1)].Contributions <= 29){
-                    color_t = "d"
+                    color_t = "d";
+                    data_tooltip = days[(i+1)*(j+1)].Contributions+" contributions";
                 }
                 else if (days[(i+1)*(j+1)].Contributions >= 30){
-                    color_t = "e"
+                    color_t = "e";
+                    data_tooltip = days[(i+1)*(j+1)].Contributions+" contributions";
                 }
 
                 td.setAttribute('class', "td "+color_t);
-                td.setAttribute('data-tooltip', "test");
+                td.setAttribute('data-tooltip', data_tooltip + " " + new Date(days[(i+1)*(j+1)].Date))
                 tr.appendChild(td);
                 // d--;
             }
